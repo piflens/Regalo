@@ -1,4 +1,4 @@
-// LISTA DE MENSAJES (Puedes añadir hasta 365)
+// LISTA DE MENSAJES (Mantenemos tus 30 frases)
 const mensajes = [ 
     "Tu apoyo ha sido fundamental para mi crecimiento este año.",
     "Gracias por creer en mis proyectos incluso cuando eran solo ideas.",
@@ -32,17 +32,60 @@ const mensajes = [
     "¡Gracias por todo, Nadia! Disfruta tu día."
 ];
 
-function iniciarPagina() {
-    // 1. Obtener la fecha actual
+let escribiendo = false;
+
+// 1. FUNCIÓN PARA EL VASO (Se activa al hacer click en el 🥤)
+function iniciarEfecto() {
+    if (escribiendo) return; 
+
     const ahora = new Date();
     const inicio = new Date(ahora.getFullYear(), 0, 1);
-    
-    // 2. Calcular el día del año de forma exacta
-    const diferenciaMs = ahora - inicio;
-    const diaDelAño = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24)) + 1;
-    
-    // 3. Seleccionar el mensaje (usa el residuo para repetir si hay menos de 365)
+    const diaDelAño = Math.floor((ahora - inicio) / (1000 * 60 * 60 * 24)) + 1;
     const indice = (diaDelAño - 1) % mensajes.length;
+    const texto = mensajes[indice];
+
+    // Mostramos el cursor y activamos la escritura
+    document.getElementById('cursor').style.display = 'inline';
+    escribirConSonido(texto);
+}
+
+// 2. LÓGICA DE ESCRITURA Y SONIDO
+function escribirConSonido(texto) {
+    escribiendo = true;
+    let i = 0;
+    const caja = document.getElementById('daily-message');
+    const sonido = document.getElementById('type-sound');
+    caja.innerHTML = "";
+
+    function type() {
+        if (i < texto.length) {
+            caja.innerHTML += texto.charAt(i);
+            
+            // Clonamos el audio para que cada letra suene rápido (efecto ráfaga)
+            let click = sonido.cloneNode();
+            click.volume = 0.4;
+            click.play().catch(e => console.log("Esperando click del usuario"));
+
+            i++;
+            setTimeout(type, 65); 
+        } else {
+            escribiendo = false;
+            // El cursor desaparece al terminar
+            document.getElementById('cursor').style.display = 'none';
+        }
+    }
+    type();
+}
+
+// 3. ACTUALIZAR EL NÚMERO DEL DÍA AL CARGAR
+function actualizarDia() {
+    const ahora = new Date();
+    const inicio = new Date(ahora.getFullYear(), 0, 1);
+    const diaDelAño = Math.floor((ahora - inicio) / (1000 * 60 * 60 * 24)) + 1;
+    document.getElementById('day-num').innerText = diaDelAño;
+}
+
+// Asegúrate de llamar a actualizarDia() dentro de tu window.onload o donde inicialices las partículas.
     
     // 4. Mostrar en pantalla
     document.getElementById('daily-message').innerText = mensajes[indice];
