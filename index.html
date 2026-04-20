@@ -11,22 +11,16 @@
     <audio id="type-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_249339396d.mp3" preload="auto"></audio>
 <body>
     <div id="particles-js"></div>
-
     <div class="glass-card">
         <div class="counter">Día <span id="day-num"></span> de 365</div>
-        
         <h1>Nadia</h1>
         <p class="intro">Este regalo es para ti por todo lo que me has ayudado a crecer.</p>
-        
-        <div class="stanley-container">🥤</div>
-        
-        <div class="message-box" id="daily-message">
-            Cargando mensaje...
+        <div class="stanley-container" onclick="iniciarEfecto()">🥤</div>
+        <div class="message-box">
+    <span id="daily-message">Haz click en el termo...</span><span id="cursor" class="cursor"></span>
         </div>
-
         <p class="footer-text">Escanea tu termo cada día</p>
     </div>
-
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
