@@ -1,9 +1,8 @@
-/* Reseteo básico para que se vea igual en todos los navegadores */
+/* Reseteo básico */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Montserrat', sans-serif;
-    /* Fondo con degradado oscuro */
     background: linear-gradient(135deg, #1e1e1e, #2c3e50);
     height: 100vh;
     display: flex;
@@ -16,12 +15,12 @@ body {
 /* Capa del fondo animado */
 #particles-js { position: absolute; width: 100%; height: 100%; z-index: 1; }
 
-/* La tarjeta con efecto de vidrio (Glassmorphism) */
+/* La tarjeta Glassmorphism */
 .glass-card {
     position: relative;
     z-index: 10;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px); /* Desenfoque del fondo */
+    backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 40px 20px;
     border-radius: 30px;
@@ -31,24 +30,26 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* Estilo del nombre */
 h1 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 15px; color: #ffeb3b; }
 
-/* Estilo del icono flotante */
-/* Estilo del icono con brillo intenso */
+/* EL VASO: Brillo intenso y animación */
 .stanley-container {
     font-size: 65px;
     margin-bottom: 25px;
-    /* Efecto de resplandor amarillo neón */
     filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8)) 
             drop-shadow(0 0 30px rgba(255, 235, 59, 0.4));
-    animation: float 3s ease-in-out infinite;
-    display: inline-block; /* Asegura que la animación y el filtro funcionen bien */
+    animation: float 3s ease-in-out infinite, neon-glow 4s ease-in-out infinite;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
-/* Caja de mensajes */
+
+.stanley-container:active { transform: scale(0.9); }
+
+/* CAJA DE MENSAJES */
 .message-box {
     font-size: 1.1rem;
-    min-height: 100px;
+    min-height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,15 +57,31 @@ h1 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 1
     background: rgba(0,0,0,0.2);
     border-radius: 20px;
     margin: 20px 0;
-    border-left: 4px solid #ffeb3b; /* Línea decorativa amarilla */
+    border-left: 4px solid #ffeb3b;
+}
+
+/* EL CURSOR (Para que se vea que está escribiendo) */
+.cursor {
+    border-right: 2px solid #ffeb3b;
+    animation: blink 0.7s infinite;
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .counter { font-size: 0.8rem; font-weight: 600; color: #ffeb3b; letter-spacing: 2px; }
+.footer-text { font-size: 0.7rem; opacity: 0.5; margin-top: 10px; }
 
-.footer-text { font-size: 0.7rem; opacity: 0.5; }
-
-/* Animación para que el icono suba y baje */
+/* ANIMACIONES */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
+}
+
+@keyframes neon-glow {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8)); }
+    50% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8)); }
 }
