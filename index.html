@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un regalo para ti</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #f4f7f6; color: #333; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; font-size: 24px; }
+        .stanley-icon { font-size: 50px; margin: 20px 0; }
+        .message-box { font-style: italic; font-size: 1.2em; color: #555; margin: 20px 0; min-height: 80px; display: flex; align-items: center; justify-content: center; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+        .footer { font-size: 0.9em; color: #888; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nadia, este regalo es para ti</h1>
+        <p>Dado todo lo que me has ayudado a crecer.</p>
+        
+        <div class="stanley-icon">🥤</div>
+        
+        <div class="message-box" id="daily-message">
+            </div>
+
+        <p class="footer">Día <span id="day-number"></span> de 365</p>
+    </div>
+
+    <script>
+        // AQUÍ PUEDES IR AGREGANDO O MODIFICANDO LOS MENSAJES
+        const mensajes = [
+            "Gracias por estar en cada paso de este camino.", // Día 1
+            "Tu apoyo ha sido fundamental para mis proyectos.", // Día 2
+            "Hoy es un gran día para disfrutar ese café en tu Stanley.", // Día 3
+            // Agrega más frases entre comillas separadas por comas
+        ];
+
+        function mostrarMensaje() {
+            const inicioAño = new Date(new Date().getFullYear(), 0, 0);
+            const hoy = new Date();
+            const dif = hoy - inicioAño;
+            const unDia = 1000 * 60 * 60 * 24;
+            const diaDelAño = Math.floor(dif / unDia) - 1;
+
+            const indice = diaDelAño % mensajes.length;
+            document.getElementById('daily-message').innerText = mensajes[indice] || "¡Que tengas un excelente día!";
+            document.getElementById('day-number').innerText = diaDelAño + 1;
+        }
+
+        mostrarMensaje();
+    </script>
+</body>
+</html>
