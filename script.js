@@ -42,7 +42,9 @@ function iniciarEfecto() {
     const indice = (diaDelAño - 1) % mensajes.length;
     const texto = mensajes[indice];
 
-    document.getElementById('cursor').style.display = 'inline';
+    const cursorElement = document.getElementById('cursor');
+    if (cursorElement) cursorElement.style.display = 'inline';
+    
     escribirConSonido(texto);
 }
 
@@ -51,21 +53,25 @@ function escribirConSonido(texto) {
     let i = 0;
     const caja = document.getElementById('daily-message');
     const sonido = document.getElementById('type-sound');
-    caja.innerHTML = "";
+    
+    if (caja) caja.innerHTML = "";
 
     function type() {
         if (i < texto.length) {
-            caja.innerHTML += texto.charAt(i);
+            if (caja) caja.innerHTML += texto.charAt(i);
             
-            let click = sonido.cloneNode();
-            click.volume = 0.4;
-            click.play().catch(e => {});
+            if (sonido) {
+                let click = sonido.cloneNode();
+                click.volume = 0.4;
+                click.play().catch(() => {});
+            }
 
             i++;
             setTimeout(type, 65); 
         } else {
             escribiendo = false;
-            document.getElementById('cursor').style.display = 'none';
+            const cursorElement = document.getElementById('cursor');
+            if (cursorElement) cursorElement.style.display = 'none';
         }
     }
     type();
@@ -77,26 +83,31 @@ function iniciarPagina() {
     const diaDelAño = Math.floor((ahora - inicio) / (1000 * 60 * 60 * 24)) + 1;
     
     const dayElement = document.getElementById('day-num');
-    if(dayElement) dayElement.innerText = diaDelAño;
+    if (dayElement) dayElement.innerText = diaDelAño;
 
     if (typeof particlesJS !== 'undefined') {
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 50 },
-                "shape": { "type": "heart" },
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ffffff" },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2 },
-                "move": { "enable": true, "speed": 1.5 }
+                "shape": { "type": "heart" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 5, "random": true },
+                "line_linked": { 
+                    "enable": true, 
+                    "distance": 150, 
+                    "color": "#ffffff", 
+                    "opacity": 0.3, 
+                    "width": 1 
+                },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true }
             },
             "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" } }
+                "events": { "onhover": { "enable": true, "mode": "grab" } },
+                "modes": { "grab": { "distance": 200 } }
             }
         });
     }
 }
 
-window.onload = iniciarPagina;
-}
-
-// Ejecutar al cargar
 window.onload = iniciarPagina;
