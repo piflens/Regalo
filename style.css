@@ -35,12 +35,16 @@ body {
 h1 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 15px; color: #ffeb3b; }
 
 /* Estilo del icono flotante */
+/* Estilo del icono con brillo intenso */
 .stanley-container {
-    font-size: 60px;
-    margin-bottom: 20px;
-    animation: float 3s ease-in-out infinite; /* Animación de flotado */
+    font-size: 65px;
+    margin-bottom: 25px;
+    /* Efecto de resplandor amarillo neón */
+    filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8)) 
+            drop-shadow(0 0 30px rgba(255, 235, 59, 0.4));
+    animation: float 3s ease-in-out infinite;
+    display: inline-block; /* Asegura que la animación y el filtro funcionen bien */
 }
-
 /* Caja de mensajes */
 .message-box {
     font-size: 1.1rem;
