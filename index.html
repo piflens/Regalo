@@ -5,121 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Nadia ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #1e1e1e, #2c3e50);
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            color: white;
-        }
-        /* Fondo de partículas */
-        #particles-js { position: absolute; width: 100%; height: 100%; z-index: 1; }
-
-        .glass-card {
-            position: relative;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px 20px;
-            border-radius: 30px;
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        h1 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 15px; color: #ffeb3b; }
-        p.intro { font-size: 0.9rem; margin-bottom: 30px; line-height: 1.6; opacity: 0.9; }
-        
-        .stanley-container {
-            font-size: 60px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255,235,59,0.5));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .message-box {
-            font-size: 1.1rem;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 20px;
-            margin: 20px 0;
-            border-left: 4px solid #ffeb3b;
-        }
-
-        .counter { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #ffeb3b; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div id="particles-js"></div>
 
     <div class="glass-card">
         <div class="counter">Día <span id="day-num"></span> de 365</div>
+        
         <h1>Nadia</h1>
         <p class="intro">Este regalo es para ti por todo lo que me has ayudado a crecer.</p>
         
         <div class="stanley-container">🥤</div>
         
         <div class="message-box" id="daily-message">
-            Cargando tu mensaje de hoy...
+            Cargando mensaje...
         </div>
 
-        <p style="font-size: 0.7rem; opacity: 0.5;">Escanea tu termo cada día</p>
+        <p class="footer-text">Escanea tu termo cada día</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        const mensajes = [
-            "Tu capacidad para resolver problemas me inspira a ser mejor.",
-            "Gracias por ser mi guía y apoyo constante en este camino.",
-            "Hoy el café sabe mejor porque sé que cuento contigo.",
-            "Tu paciencia ha sido la clave de mi crecimiento.",
-            "Eres una profesional increíble y una persona aún mejor.",
-            "Que este termo te acompañe en tus mayores éxitos.",
-            "Admiro tu forma de ver el mundo, gracias por compartirla.",
-            "Hoy es un excelente día para conquistar nuevas metas.",
-            "Gracias por creer en mis ideas, incluso en las más locas.",
-            "Tu energía positiva hace que el trabajo sea mucho más ligero."
-        ];
-
-        function init() {
-            const now = new Date();
-            const start = new Date(now.getFullYear(), 0, 0);
-            const diff = now - start;
-            const oneDay = 1000 * 60 * 60 * 24;
-            const dayOfYear = Math.floor(diff / oneDay);
-            
-            const index = (dayOfYear - 1) % mensajes.length;
-            document.getElementById('daily-message').innerText = mensajes[index];
-            document.getElementById('day-num').innerText = dayOfYear;
-
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": { "value": 50 },
-                    "color": { "value": "#ffffff" },
-                    "shape": { "type": "heart" },
-                    "opacity": { "value": 0.3 },
-                    "size": { "value": 3 },
-                    "move": { "enable": true, "speed": 1, "direction": "top" }
-                }
-            });
-        }
-        init();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
