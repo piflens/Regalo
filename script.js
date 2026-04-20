@@ -1,4 +1,4 @@
-// LISTA DE MENSAJES (Mantenemos tus 30 frases)
+// 1. LISTA DE MENSAJES
 const mensajes = [ 
     "Tu apoyo ha sido fundamental para mi crecimiento este año.",
     "Gracias por creer en mis proyectos incluso cuando eran solo ideas.",
@@ -34,7 +34,7 @@ const mensajes = [
 
 let escribiendo = false;
 
-// 1. FUNCIÓN PARA EL VASO (Se activa al hacer click en el 🥤)
+// 2. FUNCIÓN PARA EL VASO (Se activa al hacer click en el 🥤)
 function iniciarEfecto() {
     if (escribiendo) return; 
 
@@ -49,7 +49,7 @@ function iniciarEfecto() {
     escribirConSonido(texto);
 }
 
-// 2. LÓGICA DE ESCRITURA Y SONIDO
+// 3. LÓGICA DE ESCRITURA Y SONIDO
 function escribirConSonido(texto) {
     escribiendo = true;
     let i = 0;
@@ -61,48 +61,55 @@ function escribirConSonido(texto) {
         if (i < texto.length) {
             caja.innerHTML += texto.charAt(i);
             
-            // Clonamos el audio para que cada letra suene rápido (efecto ráfaga)
+            // Sonido de máquina de escribir
             let click = sonido.cloneNode();
             click.volume = 0.4;
-            click.play().catch(e => console.log("Esperando click del usuario"));
+            click.play().catch(e => console.log("Interacción requerida"));
 
             i++;
             setTimeout(type, 65); 
         } else {
             escribiendo = false;
-            // El cursor desaparece al terminar
             document.getElementById('cursor').style.display = 'none';
         }
     }
     type();
 }
 
-// 3. ACTUALIZAR EL NÚMERO DEL DÍA AL CARGAR
-function actualizarDia() {
+// 4. INICIALIZACIÓN GENERAL (Al cargar la página)
+function iniciarPagina() {
+    // Calcular día del año para el contador superior
     const ahora = new Date();
     const inicio = new Date(ahora.getFullYear(), 0, 1);
     const diaDelAño = Math.floor((ahora - inicio) / (1000 * 60 * 60 * 24)) + 1;
-    document.getElementById('day-num').innerText = diaDelAño;
-}
-
-// Asegúrate de llamar a actualizarDia() dentro de tu window.onload o donde inicialices las partículas.
     
-    // 4. Mostrar en pantalla
-    document.getElementById('daily-message').innerText = mensajes[indice];
     document.getElementById('day-num').innerText = diaDelAño;
 
-    // 5. Configurar los corazones flotantes
+    // Configurar partículas (Red Neuronal)
     particlesJS("particles-js", {
         "particles": {
-            "number": { "value": 40 },
-            "shape": { "type": "heart" },
+            "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
             "color": { "value": "#ffffff" },
-            "opacity": { "value": 0.3 },
-            "size": { "value": 3 },
-            "move": { "enable": true, "speed": 1, "direction": "top" }
-        }
+            "shape": { "type": "heart" },
+            "opacity": { "value": 0.5, "random": true },
+            "size": { "value": 5, "random": true },
+            "line_linked": { 
+                "enable": true, 
+                "distance": 150, 
+                "color": "#ffffff", 
+                "opacity": 0.3, 
+                "width": 1 
+            },
+            "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "grab" } },
+            "modes": { "grab": { "distance": 200 } }
+        },
+        "retina_detect": true
     });
 }
 
-// Ejecutar todo al cargar la página
+// Ejecutar al cargar
 window.onload = iniciarPagina;
